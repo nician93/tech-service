@@ -1,0 +1,184 @@
+{% extends "basef.html" %} {% block content %}
+<div class="container">
+  <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+    
+
+    <ul class="nav col-12 col-lg-auto me-lg-auto mt-3 justify-content-center mb-md-0">
+      <li ><a href=""id="toggleForm" class="px-2 " style="text-decoration:underline;">Enter Refund Info</a></li>
+      <li><a href="" id="toggleForm2" class="px-2" style="text-decoration:underline;">View Refund Info</a></li>
+
+    </ul>
+
+  </div>
+</div>
+
+<div class="container" id="form11">
+  {% if messages %}
+      {{ message.tags }}
+      <div class="alert alert-info" role="alert" style="display:block;" id="msg1">
+      {% for message in messages %}
+      {{ message }}
+      {% endfor %}
+      </div>
+    {% endif %}
+  <form method="post" action="" id="hiddenForm" style="display: none;" class="w-50 mt-3">
+     {% csrf_token %}
+    <div class="form-outline mb-1">
+      <label class="form-label">*User Name</label>
+      <input type="text" name="uname" class="form-control form-control-lg" value="{{uname}}" required readonly/>
+    </div>
+    <div class="form-outline mb-1">
+    <label class="form-label" >*Circle Name</label>
+    <input type="text"  name="circle_name" class="form-control form-control-lg" required/>
+  </div>
+  <div class="form-outline mb-1">
+    <label class="form-label">*Date</label>
+    <input type="date" id="cdt" name="refund_date" class="form-control form-control-lg"  required/>
+  </div>
+  <div class="form-outline mb-1">
+    <label class="form-label" for="">*Amount</label>
+    <input type="number" id="number" name="refund_amount" class="form-control form-control-lg" required/>
+  </div>
+  <div class="d-flex justify-content-end pt-3">
+    <button type="submit" form="hiddenForm" value="submit" class="btn btn-warning btn-lg ms-2" name="submit1">Submit form</button>
+  </div>
+  </form>
+  <form method="post" action="" id="hiddenForm2" style="display: none;" class="w-25 mt-5" >
+    {% csrf_token %}
+    <div class="form-outline mb-1">
+   
+    <input type="date" class="form-control form-control-lg" name="dt" value="date" required>
+  </div>
+    <button class="btn btn-info btn-block mt-3" id="sub1" name="submit2" form="hiddenForm2" type="submit" value="submit">Submit</button>
+  </form>
+  {% if info %}
+<div class="mt-5 mb-3"  id="showTable">
+  
+<table class="table table-bordered text-center"  id="data-table">
+
+  <thead>
+    <tr>
+      <th colspan="4">
+        <h3 class="text-center">Refund Information as on date {{dt}}</h3>
+      </th>
+      
+    </tr>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Circle Name</th>
+        <th scope="col">Refund Amount</th>
+        <th scope="col">Refund User</th>
+      </tr>
+    </thead>
+    {% for i in info %}
+    <tbody>
+      <tr>
+        <th scope="row">{{forloop.counter}}</th>
+        <td>{{i.circle_name}}</td>
+        <td>{{i.refund_amount}}</td>
+        <td>{{i.refund_user}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+</table>
+<button id="export-button">Export to Excel</button>
+</div>
+{% endif %}
+</div>
+
+
+<script>
+  const toggleFormButton = document.getElementById('toggleForm');
+  const hiddenForm = document.getElementById('hiddenForm');
+  const toggleFormButton2 = document.getElementById('toggleForm2');
+  const hiddenForm2 = document.getElementById('hiddenForm2');
+  const msg1 = document.getElementById('msg1');
+  const showTable = document.getElementById('showTable')
+
+  
+  toggleFormButton.addEventListener('click', function(event) {
+      event.preventDefault();
+      hiddenForm.style.display = hiddenForm.style.display === 'none' ? 'block' : 'none'; 
+      hiddenForm2.style.display = 'none';
+      showTable.style.display = 'none';
+      msg1.style.display = 'none';
+      
+  });
+  
+  toggleFormButton2.addEventListener('click', function(event) {
+      event.preventDefault();
+      hiddenForm2.style.display = hiddenForm2.style.display === 'none' ? 'block' : 'none';
+      hiddenForm.style.display = 'none';
+      msg1.style.display = 'none';
+      showTable.style.display = 'none';
+       
+      
+     
+  });
+  var date=new Date();
+    var tdt=date.getDate();
+    var tmt=date.getMonth()+1;
+    if(tdt<10){
+      tdt="0" + tdt;
+    }
+    if(tmt<10){
+      tmt="0" + tmt;
+    }
+   var y=date.getUTCFullYear();
+   var minDate = y + "-" + tmt + "-" + tdt;
+   //console.log(minDate);
+   document.getElementById('cdt').setAttribute('min',minDate);
+  /*sub1.addEventListener('click', function(event) {
+      event.preventDefault();
+      showTable.style.display = showTable.style.display === 'none' ? 'table' : 'none';
+  });*/
+  if( window.history.replaceState ){
+    window.history.replaceState(null,null,window.location.href)
+  }
+</script>
+<script>
+  //it is used for exporting table data to excel
+    document.getElementById('export-button').addEventListener('click', function () {
+        var table = document.getElementById('data-table');
+        var ws = XLSX.utils.table_to_sheet(table);
+        var wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+        XLSX.writeFile(wb, 'table_data.xlsx');
+    });
+
+    
+
+
+
+    
+</script>
+
+   <!--
+    <div class="text-end">
+      <button type="button" class="btn btn-outline-light me-2"><a href="{% url 'login' %}">Login</a></button>
+      <button type="button" class="btn btn-warning"><a href="{% url 'signup' %}">Sign-up</a></button>
+    </div>--> 
+ 
+   
+  
+{% endblock %}
+<!--<table class="table table-bordered">
+    <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">First Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">Email</th>
+        </tr>
+      </thead>
+      {% for i in info %}
+      <tbody>
+        <tr>
+          <th scope="row">{{i.id}}</th>
+          <td>{{i.first_name}}</td>
+          <td>{{i.last_name}}</td>
+          <td>{{i.email}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+</table>-->

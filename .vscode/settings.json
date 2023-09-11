@@ -1,0 +1,11 @@
+{
+    "css.styleSheets": [],
+    "emmet.showAbbreviationSuggestions": false,
+    "emmet.useInlineCompletions": true,
+    "html-css-class-completion.enableEmmetSupport": true,
+    "files.associations":{"*html":"html"},
+    "emmet.triggerExpansionOnTab":true,
+    "emmet.syntaxProfiles": {
+       
+    }
+}

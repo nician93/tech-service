@@ -1,0 +1,31 @@
+.new-margin li{
+    margin-left:40px
+  }
+  .marq{
+    color:#1b1e1f;
+    font-family: 'Sen', sans-serif;
+    display: flex;   
+  }
+  
+  .service{
+    font-size: 1.5rem;
+    color: #1b1e1f;
+    font-family: 'Sen', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+  }
+  .box-img{
+    height: 320px;
+    width: 100%;
+    background-size: cover;
+    margin-top: 10px; 
+  }
+ 
+ .footer-1{
+  background-color: #1b2e42;
+  
+ }
+ 
+

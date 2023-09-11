@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.84.0">
+    <title>Tech Services Online</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sen:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" >
+    <script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>
+    <!-- Bootstrap core CSS -->
+<!--<link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">-->
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+       
+      }
+      .carousel-item img{
+        height: 600px;
+      }
+      
+@media (min-width:1200px) {
+    .new-height {
+    max-width: 100%;
+    height: 700px;
+}
+}
+
+     
+.bkg{
+      background-image: url('/static/images/contact.jpg');
+      background-size: cover;
+      height: 761px;
+      
+     }
+
+a{
+  text-decoration: none;
+ }
+  a:hover {
+  background-color: #155daa;
+  color: white;
+ }
+ header .active a{
+  background-color: darkgray;
+ }
+ html{
+  height: 100%;
+ }
+ body{
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+ }
+ #export-button:hover {
+  background-color: #555555;
+  color: white;
+    }
+     
+    </style>
+
+    <!-- Custom styles for this template -->
+    <link  href="/static/style2.css" rel="stylesheet">
+    <link href="/static/headers.css" rel="stylesheet">
+    <link  href="/static/login.css" rel="stylesheet">
+    <link  href="/static/navbar.css" rel="stylesheet">
+  </head>
+<body>
+ 
+ <main>
+  
+  <!--<div class="b-example-divider"></div>-->
+
+  <header class="p-3 bg-dark text-white">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <div class="logo">
+          <img src="/static/images/logo1.png" height="60"  alt="MDB Logo"
+        loading="lazy" />
+        </div>
+
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 new-margin">
+          <li class="{% if request.path == '/' %} active {% endif %}"><a href="{% url 'home' %}" class="nav-link px-2 text-white">Home</a></li>
+          <li><a href="#" class="nav-link px-2 text-white">About Us</a></li>
+          <li><a href="#our-serives" class="nav-link px-2 text-white">Services</a></li>
+          <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
+          <li class="{% if request.path == '/contact-us/' %} active {% endif %}"><a href="{% url 'contact-us' %}" class="nav-link px-2 text-white">Contact Us</a></li>
+          <li><a href="{% url 'profile' %}" class="nav-link px-2 text-white">Profile</a></li>
+          <li><a href="{% url 'logout' %}" class="btn btn-primary">Logout</a></li>
+        </ul>
+
+        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+          <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search" id="search" name="search">
+        </form>
+        {{request.user}} <br>
+        {{request.user.first_name}}
+       <!--
+        <div class="text-end">
+          <button type="button" class="btn btn-outline-light me-2"><a href="{% url 'login' %}">Login</a></button>
+          <button type="button" class="btn btn-warning"><a href="{% url 'signup' %}">Sign-up</a></button>
+        </div>--> 
+      </div>
+    </div>
+  </header>
+</main>
